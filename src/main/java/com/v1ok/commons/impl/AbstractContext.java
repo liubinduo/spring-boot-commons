@@ -1,7 +1,8 @@
 package com.v1ok.commons.impl;
 
-import com.forceclouds.context.IContext;
-import com.forceclouds.context.IUserContext;
+
+import com.v1ok.commons.IContext;
+import com.v1ok.commons.IUserContext;
 
 /**
  * Created by liubinduo on 2017/5/16.

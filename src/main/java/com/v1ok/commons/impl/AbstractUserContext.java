@@ -1,6 +1,6 @@
 package com.v1ok.commons.impl;
 
-import com.forceclouds.context.IUserContext;
+import com.v1ok.commons.IUserContext;
 import java.util.List;
 import lombok.ToString;
 import org.apache.commons.lang3.builder.EqualsBuilder;

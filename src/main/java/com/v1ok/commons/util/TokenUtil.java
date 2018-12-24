@@ -1,9 +1,9 @@
 package com.v1ok.commons.util;
 
-import com.forceclouds.context.Head;
-import com.forceclouds.context.IContext;
-import com.forceclouds.context.IUserContext;
-import com.forceclouds.context.impl.DefaultUserContext;
+import com.v1ok.commons.Head;
+import com.v1ok.commons.IContext;
+import com.v1ok.commons.IUserContext;
+import com.v1ok.commons.impl.DefaultUserContext;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;

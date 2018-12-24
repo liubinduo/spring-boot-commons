@@ -1,15 +1,15 @@
 package com.v1ok.commons.interceptor;
 
-import com.forceclouds.context.ContextHolder;
-import com.forceclouds.context.Head;
-import com.forceclouds.context.HeadCode;
-import com.forceclouds.context.IRestResponse;
-import com.forceclouds.context.IUserContext;
-import com.forceclouds.context.RequestValue;
-import com.forceclouds.context.annotation.AuthorityRequired;
-import com.forceclouds.context.impl.DefaultContext;
-import com.forceclouds.context.impl.RestResponse;
-import com.forceclouds.context.util.TokenUtil;
+import com.v1ok.commons.ContextHolder;
+import com.v1ok.commons.Head;
+import com.v1ok.commons.HeadCode;
+import com.v1ok.commons.IRestResponse;
+import com.v1ok.commons.IUserContext;
+import com.v1ok.commons.RequestValue;
+import com.v1ok.commons.annotation.AuthorityRequired;
+import com.v1ok.commons.impl.DefaultContext;
+import com.v1ok.commons.impl.RestResponse;
+import com.v1ok.commons.util.TokenUtil;
 import com.google.common.collect.Sets;
 import javax.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;

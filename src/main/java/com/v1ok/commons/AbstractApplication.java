@@ -1,7 +1,7 @@
 package com.v1ok.commons;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.forceclouds.context.converter.json.TextPlanMappingJackson2HttpMessageConverter;
+import com.v1ok.commons.converter.json.TextPlanMappingJackson2HttpMessageConverter;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.converter.HttpMessageConverter;
