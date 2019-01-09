@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 /**
  * @Author:liubinduo
- * @Description:
  * @Date:Create in 15:36 2017/11/12
  */
 public abstract class AbstractTreeData<E> {
