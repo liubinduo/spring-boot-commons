@@ -6,8 +6,10 @@
 
   <groupId>com.v1ok</groupId>
   <artifactId>spring-boot-commons</artifactId>
-  <version>1.0-SNAPSHOT</version>
-
+  <version>0.1.0</version>
+  <name>spring-boot-commons</name>
+  <description>spring boot commons</description>
+  <url>http://www.v1ok.com</url>
 
   <dependencies>
     <dependency>
@@ -184,8 +186,8 @@
   </licenses>
 
   <scm>
-    <url>https://github.com/liubinduo/uuid</url>
-    <connection>https://github.com/liubinduo/uuid.git</connection>
+    <url>https://github.com/liubinduo/spring-boot-commons</url>
+    <connection>https://github.com/liubinduo/spring-boot-commons.git</connection>
     <developerConnection>http://www.v1ok.com</developerConnection>
   </scm>
 

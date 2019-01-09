@@ -7,9 +7,8 @@ import java.util.List;
 import org.apache.commons.collections.CollectionUtils;
 
 /**
- * @Author:liubinduo
- * @Description:
- * @Date:Create in 14:27 2017/11/12
+ * @author liubinduo
+ * Create in 14:27 2017/11/12
  */
 public class MemTreeData<E, ID extends Serializable> extends AbstractTreeData<E> implements
     ITreeData<E, ID> {

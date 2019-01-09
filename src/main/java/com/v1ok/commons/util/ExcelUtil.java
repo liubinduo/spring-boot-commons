@@ -106,9 +106,10 @@ public final class ExcelUtil<T> {
   }
 
   /**
-   * @param sheet
-   * @param startRowNum
-   * @return
+   * @param sheet 工作表
+   * @param startRowNum 开始行号
+   * @param callBack 回调
+   * @return 结果集
    */
   public ResultObject<List<T>> importExcel(Sheet sheet, int startRowNum, ICallBack<T> callBack) {
 
