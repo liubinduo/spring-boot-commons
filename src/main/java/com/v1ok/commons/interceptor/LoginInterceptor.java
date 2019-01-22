@@ -37,7 +37,7 @@ public class LoginInterceptor extends AbstractInterceptor {
   @Autowired(required = false)
   private HttpServletRequest request;
 
-  @Around("@annotation(com.forceclouds.context.annotation.AuthorityRequired) && @annotation(log)")
+  @Around("@annotation(com.v1ok.commons.annotation.AuthorityRequired) && @annotation(log)")
   public Object Interceptor(ProceedingJoinPoint pjp, AuthorityRequired log) {
 
     RequestValue<?> value;
