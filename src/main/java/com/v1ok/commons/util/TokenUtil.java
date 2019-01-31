@@ -18,6 +18,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.commons.lang3.time.DateUtils;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 /**
  * Created by liubinduo on 2017/5/17.
@@ -31,26 +33,35 @@ public class TokenUtil {
   private static final String USER_TERRITORY_ID_KEY = "territories";
   private static final String USER_PERMISSIONS_ID_KEY = "permissions";
 
-  public static String getToken(Head head, HttpServletRequest request) {
+  public static String getToken(Head head) {
     String token;
-    //浏览器的head头中的token优先级最高
-    token = request.getHeader(TOKEN);
-    if (StringUtils.isNotEmpty(token)) {
-      return token;
+    //请求体里的token优先级最高
+    if (head != null) {
+      token = head.getToken();
+      if (StringUtils.isNoneBlank(token)) {
+        return token;
+      }
     }
 
-    //其次是url上的参数
-    token = request.getParameter(TOKEN);
-    if (StringUtils.isNotEmpty(token)) {
-      return token;
+    HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder
+        .getRequestAttributes()).getRequest();
+
+    if (request != null) {
+
+      //其次是url上的参数
+      token = request.getParameter(TOKEN);
+      if (StringUtils.isNotEmpty(token)) {
+        return token;
+      }
+
+      //最后浏览器的head头中的token
+      token = request.getHeader(TOKEN);
+      if (StringUtils.isNotEmpty(token)) {
+        return token;
+      }
     }
 
-    //最后是请求体里的token
-    if (head == null) {
-      return null;
-    } else {
-      return head.getToken();
-    }
+    return null;
   }
 
   public static String createToken(IContext context, String base64Security) {

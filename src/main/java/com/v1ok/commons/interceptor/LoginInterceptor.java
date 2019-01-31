@@ -1,16 +1,15 @@
 package com.v1ok.commons.interceptor;
 
 import com.v1ok.commons.ContextHolder;
-import com.v1ok.commons.Head;
 import com.v1ok.commons.HeadCode;
 import com.v1ok.commons.IRestResponse;
 import com.v1ok.commons.IUserContext;
 import com.v1ok.commons.RequestValue;
 import com.v1ok.commons.annotation.AuthorityRequired;
+import com.v1ok.commons.exception.AuthorityException;
 import com.v1ok.commons.impl.DefaultContext;
 import com.v1ok.commons.impl.RestResponse;
 import com.v1ok.commons.util.TokenUtil;
-import com.google.common.collect.Sets;
 import javax.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -40,43 +39,22 @@ public class LoginInterceptor extends AbstractInterceptor {
   @Around("@annotation(com.v1ok.commons.annotation.AuthorityRequired) && @annotation(log)")
   public Object Interceptor(ProceedingJoinPoint pjp, AuthorityRequired log) {
 
-    RequestValue<?> value;
-
-    String method = request.getMethod();
-    String httpHeader = request.getHeader("Content-Type");
-
-    if (Sets.newHashSet("GET", "DELETE").contains(method)) {
-      value = new RequestValue<>();
-    } else if (StringUtils.isBlank(httpHeader) || httpHeader.startsWith("multipart/form-data")) {
-      value = new RequestValue<>();
-    } else {
-      value = getArg(pjp, RequestValue.class);
-    }
+    RequestValue<?> value = getArg(pjp, RequestValue.class);
 
     if (value == null) {
-      throw new RuntimeException("method of ctrl is error!");
+      value = new RequestValue<>();
     }
 
-    Head head = value.getHead();
-
-    String token = TokenUtil.getToken(head, request);
+    String token = TokenUtil.getToken(value.getHead());
 
     if (StringUtils.isEmpty(token)) {
-      IRestResponse resp = RestResponse.builder().error(HeadCode.UN_AUTHORIZED);
-
-      resp.getHead().setMsg("TOKEN不能为空！");
-
-      return resp;
+      throw new AuthorityException();
     }
 
     IUserContext userContext = TokenUtil.parseToken(token, key);
 
     if (userContext == null) {
-      IRestResponse resp = RestResponse.builder().error(HeadCode.UN_AUTHORIZED);
-
-      resp.getHead().setMsg("身份失效");
-
-      return resp;
+      throw new AuthorityException();
     }
 
     // 权限判断
@@ -90,9 +68,6 @@ public class LoginInterceptor extends AbstractInterceptor {
       return resp;
 
     }
-
-    head.setToken(token);
-    value.setHead(head);
 
     DefaultContext context = new DefaultContext(userContext);
     ContextHolder.getHolder().set(context);
@@ -113,6 +88,5 @@ public class LoginInterceptor extends AbstractInterceptor {
       throw new RuntimeException(throwable);
     }
   }
-
 
 }

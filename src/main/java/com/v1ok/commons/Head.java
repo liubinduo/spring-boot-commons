@@ -15,6 +15,8 @@ public class Head {
 
   private String tenantId;
 
+  private String actionCode;
+
   public Head() {
 
   }
@@ -56,5 +58,11 @@ public class Head {
     this.tenantId = tenantId;
   }
 
+  public String getActionCode() {
+    return actionCode;
+  }
 
+  public void setActionCode(String actionCode) {
+    this.actionCode = actionCode;
+  }
 }
