@@ -25,14 +25,20 @@ public class RestResponse<V> extends AbstractMappingJacksonValue<V> implements I
 
   }
 
-  public static RestResponse builder() {
-    RestResponse response = new RestResponse(null);
+  public static <T> RestResponse<T> builder() {
+    RestResponse<T> response = new RestResponse<>(null);
+    response.success(true);
+    return response;
+  }
+
+  public static <T> RestResponse<T> builder(T body) {
+    RestResponse<T> response = new RestResponse<>(body);
     response.success(true);
     return response;
   }
 
 
-  public RestResponse success(boolean isSuccess) {
+  public RestResponse<V> success(boolean isSuccess) {
     Head head = this.getHead();
     if (isSuccess) {
       head.setCode(HeadCode.SUCCESS.getCode());
@@ -46,28 +52,28 @@ public class RestResponse<V> extends AbstractMappingJacksonValue<V> implements I
 
 
   @Override
-  public RestResponse data(V data) {
+  public RestResponse<V> data(V data) {
     getContext().put(BODY_KEY, data);
     return this;
   }
 
-  public RestResponse serializeData(V data) {
+  public RestResponse<V> serializeData(V data) {
     getContext().put(BODY_KEY, data);
 
     return this;
   }
 
 
-  public RestResponse message(String message) {
+  public RestResponse<V> message(String message) {
     this.getHead().setMsg(message);
     return this;
   }
 
-  public RestResponse error() {
+  public RestResponse<V> error() {
     return error(HeadCode.ERROR);
   }
 
-  public RestResponse error(HeadCode headCode) {
+  public RestResponse<V> error(HeadCode headCode) {
     this.getHead().setCode(headCode.getCode());
     this.getHead().setMsg(headCode.getMsg());
     return this;
@@ -82,8 +88,9 @@ public class RestResponse<V> extends AbstractMappingJacksonValue<V> implements I
     getContext().put(HEAD_KEY, head);
   }
 
-  public Object getBody() {
-    return getContext().get(BODY_KEY);
+  @SuppressWarnings("unchecked")
+  public V getBody() {
+    return (V) getContext().get(BODY_KEY);
   }
 
   @SuppressWarnings("unchecked")
