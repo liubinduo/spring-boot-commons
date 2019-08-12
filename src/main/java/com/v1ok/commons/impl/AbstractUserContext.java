@@ -14,17 +14,17 @@ public abstract class AbstractUserContext implements IUserContext {
 
 
   @Override
-  public List<Long> getTerritories() {
+  public List<String> getTerritories() {
     return null;
   }
 
   @Override
-  public Long getUserId() {
+  public String getUserId() {
     return null;
   }
 
   @Override
-  public List<Long> getRoles() {
+  public List<String> getRoles() {
     return null;
   }
 

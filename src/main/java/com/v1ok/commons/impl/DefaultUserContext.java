@@ -17,23 +17,23 @@ import lombok.ToString;
 public class DefaultUserContext extends AbstractUserContext implements IUserContext {
 
 
-  protected Long userId;
-  protected List<Long> territories;
-  protected List<Long> roles;
+  protected String userId;
+  protected List<String> territories;
+  protected List<String> roles;
   protected List<String> permissions;
 
   @Override
-  public List<Long> getTerritories() {
+  public List<String> getTerritories() {
     return this.territories;
   }
 
   @Override
-  public Long getUserId() {
+  public String getUserId() {
     return this.userId;
   }
 
   @Override
-  public List<Long> getRoles() {
+  public List<String> getRoles() {
     return this.roles;
   }
 

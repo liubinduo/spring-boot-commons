@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.xml.bind.DatatypeConverter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -95,10 +94,9 @@ public class TokenUtil {
 
       if (claims != null) {
 
-        List<Long> roles = claims.get(TokenUtil.USER_ROLES_ID_KEY, List.class);
-        Object userIdObj = claims.get(TokenUtil.USER_ID_KEY);
-        Long userId = NumberUtils.toLong(userIdObj == null ? "0" : userIdObj.toString());
-        List<Long> territories = claims.get(TokenUtil.USER_TERRITORY_ID_KEY, List.class);
+        List<String> roles = claims.get(TokenUtil.USER_ROLES_ID_KEY, List.class);
+        String userId = claims.get(TokenUtil.USER_ID_KEY, String.class);
+        List<String> territories = claims.get(TokenUtil.USER_TERRITORY_ID_KEY, List.class);
         List<String> permissions = claims.get(TokenUtil.USER_PERMISSIONS_ID_KEY, List.class);
 
         return DefaultUserContext.builder()

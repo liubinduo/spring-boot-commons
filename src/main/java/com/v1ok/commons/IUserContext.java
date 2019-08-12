@@ -7,11 +7,11 @@ import java.util.List;
  */
 public interface IUserContext {
 
-  List<Long> getTerritories();
+  List<String> getTerritories();
 
-  Long getUserId();
+  String getUserId();
 
-  List<Long> getRoles();
+  List<String> getRoles();
 
   List<String> getPermissions();
 }
