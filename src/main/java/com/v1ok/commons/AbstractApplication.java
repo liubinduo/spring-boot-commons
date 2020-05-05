@@ -7,12 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.CorsRegistration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
  * Created by liubinduo on 2017/6/29.
  */
-public abstract class AbstractApplication extends WebMvcConfigurerAdapter {
+public abstract class AbstractApplication implements WebMvcConfigurer {
 
 
   @Autowired
