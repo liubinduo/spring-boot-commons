@@ -13,7 +13,7 @@ import lombok.ToString;
 @ToString
 public class RestResponse<V> extends AbstractMappingJacksonValue<V> implements IRestResponse<V> {
 
-  private Map<String, Object> value;
+  private final Map<String, Object> value;
 
   private RestResponse(Object body) {
     super(body);

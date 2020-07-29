@@ -7,7 +7,7 @@ public enum FunctionCode {
 
   CREATE(2L), EDIT(4L), READE(8L), REMOVE(16L), LIST(32L), IMPORT(64L), EXPORT(128L);
 
-  private long code;
+  private final long code;
 
   FunctionCode(long code) {
     this.code = code;

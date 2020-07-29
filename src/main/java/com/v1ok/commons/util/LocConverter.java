@@ -230,7 +230,7 @@ public class LocConverter {
   }
 
 
-  private static double EARTH_RADIUS = 6378.137;
+  private static final double EARTH_RADIUS = 6378.137;
 
   private static double rad(double d) {
     return d * Math.PI / 180.0;

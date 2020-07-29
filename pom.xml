@@ -6,7 +6,7 @@
 
   <groupId>com.v1ok</groupId>
   <artifactId>spring-boot-commons</artifactId>
-  <version>0.1.4.1</version>
+  <version>0.1.4.2</version>
   <name>spring-boot-commons</name>
   <description>spring boot commons</description>
   <url>http://www.v1ok.com</url>
@@ -20,6 +20,7 @@
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>

@@ -13,7 +13,7 @@ import org.apache.commons.collections.CollectionUtils;
 public class MemTreeData<E, ID extends Serializable> extends AbstractTreeData<E> implements
     ITreeData<E, ID> {
 
-  private List<E> datas;
+  private final List<E> datas;
 
   public MemTreeData(List<E> datas) {
     this.datas = datas;

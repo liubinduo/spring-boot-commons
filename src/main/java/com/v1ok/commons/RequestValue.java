@@ -10,7 +10,7 @@ public class RequestValue<T> {
   @NotNull(message = "报文头不能为空！")
   private Head head;
 
-  private Map<String, Object> attributes;
+  private final Map<String, Object> attributes;
 
   @Valid
   private T body;

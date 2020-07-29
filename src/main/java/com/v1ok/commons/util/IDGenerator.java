@@ -22,7 +22,7 @@ public class IDGenerator {
   static class CustomUUID {
 
     // 基准时间
-    private long twepoch = 1288834974657L; //Thu, 04 Nov 2010 01:42:54 GMT
+    private final long twepoch = 1288834974657L; //Thu, 04 Nov 2010 01:42:54 GMT
     // 区域标志位数
     private final static long regionIdBits = 3L;
     // 机器标识位数

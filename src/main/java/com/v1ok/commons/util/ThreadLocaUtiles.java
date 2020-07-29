@@ -6,7 +6,7 @@ package com.v1ok.commons.util;
  */
 public final class ThreadLocaUtiles {
 
-  private static ThreadLocal<ThreadValues> connectionHolder = new ThreadLocal<ThreadValues>() {
+  private static final ThreadLocal<ThreadValues> connectionHolder = new ThreadLocal<ThreadValues>() {
     @Override
     protected ThreadValues initialValue() {
       ThreadValues threadValues = new ThreadValues();

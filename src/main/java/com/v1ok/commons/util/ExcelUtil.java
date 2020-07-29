@@ -13,6 +13,7 @@ import java.io.OutputStream;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.nio.charset.StandardCharsets;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -43,7 +44,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Slf4j
 public final class ExcelUtil<T> {
 
-  private Class<T> clazz;
+  private final Class<T> clazz;
 
   public ExcelUtil(Class<T> clazz) {
     this.clazz = clazz;
@@ -522,7 +523,8 @@ public final class ExcelUtil<T> {
     try {
 
       res.setHeader("Content-Disposition",
-          "attachment;filename=" + new String(fileName.getBytes("GB2312"), "ISO-8859-1"));
+          "attachment;filename=" + new String(fileName.getBytes("GB2312"),
+              StandardCharsets.ISO_8859_1));
 
       os = res.getOutputStream();
 
@@ -556,7 +558,7 @@ public final class ExcelUtil<T> {
   }
 
 
-  public static interface ICallBack<T> {
+  public interface ICallBack<T> {
 
     void initValue(T entity);
   }

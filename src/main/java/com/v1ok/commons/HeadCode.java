@@ -25,9 +25,9 @@ public enum HeadCode {
    */
   FORBIDDEN(403, "服务器已经理解请求，但是拒绝执行它");
 
-  private int code;
+  private final int code;
 
-  private String msg;
+  private final String msg;
 
   HeadCode(int code, String msg) {
     this.code = code;
