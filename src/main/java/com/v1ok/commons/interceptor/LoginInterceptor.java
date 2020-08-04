@@ -1,6 +1,7 @@
 package com.v1ok.commons.interceptor;
 
 import com.v1ok.commons.ContextHolder;
+import com.v1ok.commons.Head;
 import com.v1ok.commons.HeadCode;
 import com.v1ok.commons.IRestResponse;
 import com.v1ok.commons.IUserContext;
@@ -10,13 +11,11 @@ import com.v1ok.commons.exception.AuthorityException;
 import com.v1ok.commons.impl.DefaultContext;
 import com.v1ok.commons.impl.RestResponse;
 import com.v1ok.commons.util.TokenUtil;
-import javax.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -30,12 +29,6 @@ public class LoginInterceptor extends AbstractInterceptor {
   @Value("${jwt.key}")
   private String key;
 
-  /**
-   *
-   */
-  @Autowired(required = false)
-  private HttpServletRequest request;
-
   @Around("@annotation(com.v1ok.commons.annotation.AuthorityRequired) && @annotation(log)")
   public Object Interceptor(ProceedingJoinPoint pjp, AuthorityRequired log) {
 
@@ -45,7 +38,9 @@ public class LoginInterceptor extends AbstractInterceptor {
       value = new RequestValue<>();
     }
 
-    String token = TokenUtil.getToken(value.getHead());
+    Head head = value.getHead();
+
+    String token = TokenUtil.getToken(head);
 
     if (StringUtils.isEmpty(token)) {
       throw new AuthorityException();
@@ -56,6 +51,8 @@ public class LoginInterceptor extends AbstractInterceptor {
     if (userContext == null) {
       throw new AuthorityException();
     }
+
+    head.setTenantId(userContext.getTenantId());
 
     // 权限判断
     if (StringUtils.isNotEmpty(log.permissionCode())
@@ -73,6 +70,9 @@ public class LoginInterceptor extends AbstractInterceptor {
     ContextHolder.getHolder().set(context);
 
     try {
+
+
+
       Object proceed = pjp.proceed();
 
       if (proceed instanceof IRestResponse) {
@@ -86,6 +86,8 @@ public class LoginInterceptor extends AbstractInterceptor {
       return proceed;
     } catch (Throwable throwable) {
       throw new RuntimeException(throwable);
+    }finally {
+      ContextHolder.getHolder().remove();
     }
   }
 

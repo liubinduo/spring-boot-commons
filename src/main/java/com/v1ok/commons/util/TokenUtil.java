@@ -27,9 +27,9 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 public class TokenUtil {
 
   private static final String TOKEN = "token";
-  private static final String USER_ROLES_ID_KEY = "rules";
   private static final String USER_ID_KEY = "userId";
-  private static final String USER_TERRITORY_ID_KEY = "territories";
+  private static final String USER_TENANTID = "tenantId";
+  private static final String USER_POSITIONS_ID_KEY = "positions";
   private static final String USER_PERMISSIONS_ID_KEY = "permissions";
 
   public static String getToken(Head head) {
@@ -77,15 +77,16 @@ public class TokenUtil {
 
     JwtBuilder builder = Jwts.builder().
         setHeaderParam("typ", "JWT").
-        claim(USER_ROLES_ID_KEY, userContext.getRoles()).
         claim(USER_ID_KEY, userContext.getUserId()).
-        claim(USER_TERRITORY_ID_KEY, userContext.getTerritories()).
+        claim(USER_TENANTID,userContext.getTenantId()).
+        claim(USER_POSITIONS_ID_KEY, userContext.getPositions()).
         claim(USER_PERMISSIONS_ID_KEY, userContext.getPermissions()).
         signWith(signatureAlgorithm, signingKey)
         .setExpiration(expiration);
 
     return builder.compact();
   }
+
 
   public static IUserContext parseToken(String jsonWebToken, String key) {
     try {
@@ -94,15 +95,16 @@ public class TokenUtil {
 
       if (claims != null) {
 
-        List<String> roles = claims.get(TokenUtil.USER_ROLES_ID_KEY, List.class);
         String userId = claims.get(TokenUtil.USER_ID_KEY, String.class);
-        List<String> territories = claims.get(TokenUtil.USER_TERRITORY_ID_KEY, List.class);
+        String tenantId = claims.get(USER_TENANTID, String.class);
+        List<String> positions = claims.get(TokenUtil.USER_POSITIONS_ID_KEY, List.class);
         List<String> permissions = claims.get(TokenUtil.USER_PERMISSIONS_ID_KEY, List.class);
 
         return DefaultUserContext.builder()
             .userId(userId)
-            .territories(territories)
-            .roles(roles).permissions(permissions).build();
+            .tenantId(tenantId)
+            .positions(positions)
+            .permissions(permissions).build();
       }
     } catch (Exception e) {
       log.error("The token[" + jsonWebToken + "] is error!", e);

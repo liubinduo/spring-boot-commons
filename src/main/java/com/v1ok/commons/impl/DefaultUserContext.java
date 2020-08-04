@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import lombok.Getter;
 
 /**
  * Created by liubinduo on 2017/5/15.
@@ -14,31 +15,13 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Getter
 public class DefaultUserContext extends AbstractUserContext implements IUserContext {
 
 
   protected String userId;
-  protected List<String> territories;
-  protected List<String> roles;
+  protected List<String> positions;
   protected List<String> permissions;
+  protected String tenantId;
 
-  @Override
-  public List<String> getTerritories() {
-    return this.territories;
-  }
-
-  @Override
-  public String getUserId() {
-    return this.userId;
-  }
-
-  @Override
-  public List<String> getRoles() {
-    return this.roles;
-  }
-
-  @Override
-  public List<String> getPermissions() {
-    return this.permissions;
-  }
 }

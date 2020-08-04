@@ -6,7 +6,6 @@ import org.aspectj.lang.JoinPoint;
 public abstract class AbstractInterceptor {
 
   public AbstractInterceptor() {
-    super();
   }
 
 

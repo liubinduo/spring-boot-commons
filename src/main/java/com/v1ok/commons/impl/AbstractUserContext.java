@@ -14,17 +14,12 @@ public abstract class AbstractUserContext implements IUserContext {
 
 
   @Override
-  public List<String> getTerritories() {
+  public List<String> getPositions() {
     return null;
   }
 
   @Override
   public String getUserId() {
-    return null;
-  }
-
-  @Override
-  public List<String> getRoles() {
     return null;
   }
 
@@ -35,11 +30,21 @@ public abstract class AbstractUserContext implements IUserContext {
 
   @Override
   public boolean equals(Object obj) {
-    return EqualsBuilder.reflectionEquals(this, obj);
+
+    if (obj instanceof AbstractUserContext) {
+      return EqualsBuilder.reflectionEquals(this, obj);
+    }
+    return false;
   }
 
   @Override
   public List<String> getPermissions() {
     return null;
   }
+
+  @Override
+  public String getTenantId() {
+    return null;
+  }
+
 }
