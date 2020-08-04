@@ -1,8 +1,10 @@
 package com.v1ok.commons;
 
+import javax.validation.constraints.NotBlank;
 import lombok.ToString;
-import org.hibernate.validator.constraints.NotBlank;
+import lombok.Data;
 
+@Data
 @ToString
 public class Head {
 

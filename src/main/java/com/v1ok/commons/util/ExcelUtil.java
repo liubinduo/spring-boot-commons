@@ -42,6 +42,7 @@ import org.springframework.web.multipart.MultipartFile;
  * Created by Delong on 2017/11/6.
  */
 @Slf4j
+@Deprecated
 public final class ExcelUtil<T> {
 
   private final Class<T> clazz;

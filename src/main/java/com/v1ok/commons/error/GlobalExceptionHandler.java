@@ -15,7 +15,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
   @ExceptionHandler(AuthorityException.class)
-  public IRestResponse error(HttpServletRequest request, HttpServletResponse response) {
+  public IRestResponse<?> error(HttpServletRequest request, HttpServletResponse response) {
     response.setStatus(HttpStatus.UNAUTHORIZED.value());
     return RestResponse.builder().error(HeadCode.UN_AUTHORIZED);
   }
