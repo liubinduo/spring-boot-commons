@@ -1,11 +1,14 @@
 package com.v1ok.commons;
 
 import com.google.common.collect.Maps;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.Map;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
-public class RequestValue<T> {
+public class RequestValue<T> extends AbstractRequestValue<T> {
+
 
   @NotNull(message = "报文头不能为空！")
   private Head head;
@@ -14,6 +17,7 @@ public class RequestValue<T> {
 
   @Valid
   private T body;
+
 
   public RequestValue() {
     this.head = new Head();

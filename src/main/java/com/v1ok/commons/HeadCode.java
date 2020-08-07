@@ -1,5 +1,6 @@
 package com.v1ok.commons;
 
+
 public enum HeadCode {
 
   SUCCESS(200, "操作成功！"),
@@ -23,7 +24,11 @@ public enum HeadCode {
   /**
    * 服务器已经理解请求，但是拒绝执行它
    */
-  FORBIDDEN(403, "服务器已经理解请求，但是拒绝执行它");
+  FORBIDDEN(403, "服务器已经理解请求，但是拒绝执行它"),
+
+  NO_PERMISSION(701,"当前用户没有此操作权限");
+
+
 
   private final int code;
 

@@ -11,6 +11,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import java.security.Key;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import javax.crypto.spec.SecretKeySpec;
 import javax.servlet.http.HttpServletRequest;
 import javax.xml.bind.DatatypeConverter;
@@ -42,8 +43,9 @@ public class TokenUtil {
       }
     }
 
-    HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder
-        .getRequestAttributes()).getRequest();
+    HttpServletRequest request = ((ServletRequestAttributes) Objects
+        .requireNonNull(RequestContextHolder
+            .getRequestAttributes())).getRequest();
 
     if (request != null) {
 
