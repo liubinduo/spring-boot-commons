@@ -24,6 +24,16 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @Slf4j
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
+  @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+  @ExceptionHandler(Exception.class)
+  @ResponseBody
+  public IRestResponse<?> exceptionHandler(Exception exception){
+    log.error("服务器运行时出错未知错误",exception);
+    return RestResponse.builder().error(HeadCode.ERROR);
+  }
+
+
+
   @ResponseStatus(HttpStatus.UNAUTHORIZED)
   @ExceptionHandler(AuthorityException.class)
   @ResponseBody
