@@ -5,21 +5,23 @@ import java.util.Set;
 /**
  * Created by liubinduo on 2017/5/16.
  */
-public interface IRestResponse<B> {
+public interface IRestResponse<Body> {
 
   String HEAD_KEY = "head";
   String BODY_KEY = "body";
 
-  IRestResponse data(B data);
+  IRestResponse data(Body data);
 
   Head getHead();
 
-  IRestResponse<B> filterOutAllExcept(String id, String... propertyArray);
+  Body getBody();
 
-  IRestResponse<B> filterOutAllExcept(String id, Set<String> properties);
+  IRestResponse<Body> filterOutAllExcept(String id, String... propertyArray);
 
-  IRestResponse<B> serializeAllExcept(String id, String... propertyArray);
+  IRestResponse<Body> filterOutAllExcept(String id, Set<String> properties);
 
-  IRestResponse<B> serializeAllExcept(String id, Set<String> properties);
+  IRestResponse<Body> serializeAllExcept(String id, String... propertyArray);
+
+  IRestResponse<Body> serializeAllExcept(String id, Set<String> properties);
 
 }
