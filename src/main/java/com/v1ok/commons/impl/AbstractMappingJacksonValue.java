@@ -18,7 +18,6 @@ public abstract class AbstractMappingJacksonValue<T> extends MappingJacksonValue
   public AbstractMappingJacksonValue(Object value) {
     super(value);
     this.filter = new SimpleFilterProvider();
-    this.filter = new SimpleFilterProvider();
     this.filter.setFailOnUnknownId(false);
     this.setFilters(this.filter);
   }

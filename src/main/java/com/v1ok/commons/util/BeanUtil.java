@@ -46,12 +46,15 @@ public class BeanUtil {
 
           //判断mapValue是否是基本类型。否则应该迭代转型
           if (!TypeUtil.isBaseType(propertyType)) {
-            Object v = mapToBean(propertyType, (Map<String, Object>) mapValue);
+            Object v = simpleTypeConverter.convertIfNecessary(mapValue, propertyType);
             beanMap.put(beanProperty, v);
+            break;
           }
 
-          Object v = simpleTypeConverter.convertIfNecessary(mapValue, propertyType);
+          Object v = mapToBean(propertyType, (Map<String, Object>) mapValue);
           beanMap.put(beanProperty, v);
+
+
           break;
         }
 
