@@ -6,7 +6,7 @@
 
   <groupId>com.v1ok</groupId>
   <artifactId>spring-boot-commons</artifactId>
-  <version>232.1.6</version>
+  <version>232.1.7</version>
   <name>spring-boot-commons</name>
   <description>spring boot commons</description>
   <url>http://www.v1ok.com</url>
@@ -122,19 +122,19 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
-<!--  <distributionManagement>-->
-<!--    <repository>-->
-<!--      <id>sonatype-nexus-staging</id>-->
-<!--      <name>repository</name>-->
-<!--      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>-->
-<!--      <uniqueVersion>true</uniqueVersion>-->
-<!--    </repository>-->
-<!--    <snapshotRepository>-->
-<!--      <id>sonatype-nexus-snapshots</id>-->
-<!--      <name>snapshot</name>-->
-<!--      <url>https://oss.sonatype.org/content/repositories/snapshots</url>-->
-<!--    </snapshotRepository>-->
-<!--  </distributionManagement>-->
+  <!--  <distributionManagement>-->
+  <!--    <repository>-->
+  <!--      <id>sonatype-nexus-staging</id>-->
+  <!--      <name>repository</name>-->
+  <!--      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>-->
+  <!--      <uniqueVersion>true</uniqueVersion>-->
+  <!--    </repository>-->
+  <!--    <snapshotRepository>-->
+  <!--      <id>sonatype-nexus-snapshots</id>-->
+  <!--      <name>snapshot</name>-->
+  <!--      <url>https://oss.sonatype.org/content/repositories/snapshots</url>-->
+  <!--    </snapshotRepository>-->
+  <!--  </distributionManagement>-->
 
   <distributionManagement>
     <repository>
@@ -204,6 +204,12 @@
             <goals>
               <goal>sign</goal>
             </goals>
+            <configuration>
+              <gpgArguments>
+                <arg>--pinentry-mode</arg>
+                <arg>loopback</arg>
+              </gpgArguments>
+            </configuration>
           </execution>
         </executions>
       </plugin>

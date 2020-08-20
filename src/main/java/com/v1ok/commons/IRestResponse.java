@@ -10,7 +10,7 @@ public interface IRestResponse<Body> {
   String HEAD_KEY = "head";
   String BODY_KEY = "body";
 
-  IRestResponse data(Body data);
+  IRestResponse<Body> data(Body data);
 
   Head getHead();
 
