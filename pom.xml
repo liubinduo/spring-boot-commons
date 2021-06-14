@@ -177,7 +177,7 @@
               <goal>jar</goal>
             </goals>
             <configuration>
-              <additionalparam>-Xdoclint:none</additionalparam>
+              <doclint>none</doclint>
             </configuration>
             <phase>package</phase>
           </execution>
