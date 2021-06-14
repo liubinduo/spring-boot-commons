@@ -8,12 +8,11 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class CrossDomainFilter implements Filter {
 
-  private static final Logger LOG = LoggerFactory.getLogger(CrossDomainFilter.class);
 
   @Override
   public void destroy() {
@@ -23,7 +22,7 @@ public class CrossDomainFilter implements Filter {
   public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
       throws IOException, ServletException {
 
-    LOG.info("添加跨域请求消息头");
+    log.info("添加跨域请求消息头");
 
     HttpServletResponse httpResponse = (HttpServletResponse) response;
 
