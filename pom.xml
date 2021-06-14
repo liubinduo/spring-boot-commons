@@ -6,17 +6,12 @@
 
   <groupId>com.v1ok</groupId>
   <artifactId>spring-boot-commons</artifactId>
-  <version>232.1.7</version>
+  <version>251.1.8</version>
   <name>spring-boot-commons</name>
   <description>spring boot commons</description>
   <url>http://www.v1ok.com</url>
 
   <dependencies>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-tomcat</artifactId>
-      <optional>true</optional>
-    </dependency>
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
@@ -77,7 +72,7 @@
     <dependency>
       <groupId>org.apache.poi</groupId>
       <artifactId>poi-ooxml</artifactId>
-      <version>3.17</version>
+      <version>4.1.2</version>
     </dependency>
 
     <dependency>
@@ -96,7 +91,7 @@
       <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.3.2.RELEASE</version>
+        <version>2.5.1</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -122,62 +117,54 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
-  <!--  <distributionManagement>-->
-  <!--    <repository>-->
-  <!--      <id>sonatype-nexus-staging</id>-->
-  <!--      <name>repository</name>-->
-  <!--      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>-->
-  <!--      <uniqueVersion>true</uniqueVersion>-->
-  <!--    </repository>-->
-  <!--    <snapshotRepository>-->
-  <!--      <id>sonatype-nexus-snapshots</id>-->
-  <!--      <name>snapshot</name>-->
-  <!--      <url>https://oss.sonatype.org/content/repositories/snapshots</url>-->
-  <!--    </snapshotRepository>-->
-  <!--  </distributionManagement>-->
-
   <distributionManagement>
     <repository>
-      <id>digitalsurge</id>
-      <name>releases</name>
-      <url>${releases.url}</url>
+      <id>sonatype-nexus-staging</id>
+      <name>repository</name>
+      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+      <uniqueVersion>true</uniqueVersion>
     </repository>
     <snapshotRepository>
-      <id>digitalsurge</id>
-      <name>snapshots</name>
-      <url>${snapshot.url}</url>
+      <id>sonatype-nexus-snapshots</id>
+      <name>snapshot</name>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
     </snapshotRepository>
   </distributionManagement>
-
-
   <build>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.8.0</version>
+        <version>3.8.1</version>
         <configuration>
           <source>1.8</source>
           <target>1.8</target>
         </configuration>
       </plugin>
       <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>2.5.0</version>
+      </plugin>
+      <!--生成Source jar文件-->
+      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>
-        <version>3.0.1</version>
+        <version>3.2.1</version>
         <executions>
           <execution>
             <id>attach-sources</id>
             <goals>
-              <goal>jar</goal>
+              <goal>jar-no-fork</goal>
             </goals>
           </execution>
         </executions>
       </plugin>
+      <!--生成Javadoc，关闭doclint,避免注解检查不通过-->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
-        <version>3.0.1</version>
+        <version>3.3.0</version>
         <configuration>
           <charset>UTF-8</charset>
           <encoding>UTF-8</encoding>
@@ -189,14 +176,18 @@
             <goals>
               <goal>jar</goal>
             </goals>
+            <configuration>
+              <additionalparam>-Xdoclint:none</additionalparam>
+            </configuration>
             <phase>package</phase>
           </execution>
         </executions>
       </plugin>
+      <!--Maven GPG插件用于使用以下配置对组件进行签名-->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-gpg-plugin</artifactId>
-        <version>1.6</version>
+        <version>3.0.1</version>
         <executions>
           <execution>
             <id>sign-artifacts</id>
@@ -204,14 +195,20 @@
             <goals>
               <goal>sign</goal>
             </goals>
-            <configuration>
-              <gpgArguments>
-                <arg>--pinentry-mode</arg>
-                <arg>loopback</arg>
-              </gpgArguments>
-            </configuration>
           </execution>
         </executions>
+      </plugin>
+      <!--Nexus Staging Maven插件是将组件部署到OSSRH并将其发布到Central Repository的推荐方法-->
+      <plugin>
+        <groupId>org.sonatype.plugins</groupId>
+        <artifactId>nexus-staging-maven-plugin</artifactId>
+        <version>1.6.8</version>
+        <extensions>true</extensions>
+        <configuration>
+          <serverId>sonatype-nexus-staging</serverId>
+          <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+          <autoReleaseAfterClose>true</autoReleaseAfterClose>
+        </configuration>
       </plugin>
     </plugins>
   </build>
