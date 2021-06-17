@@ -5,9 +5,9 @@ import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 
-public class PasswordUtil {
+public final class PasswordVerification {
 
-  private PasswordUtil() {
+  private PasswordVerification() {
   }
 
   public static String generate(String password) {
@@ -39,7 +39,7 @@ public class PasswordUtil {
     return md5Hex(password + salt).equals(new String(cs1));
   }
 
-  public static String md5Hex(String src) {
+  private static String md5Hex(String src) {
     try {
       MessageDigest md5 = DigestUtils.getMd5Digest();
       byte[] bs = md5.digest(src.getBytes());
