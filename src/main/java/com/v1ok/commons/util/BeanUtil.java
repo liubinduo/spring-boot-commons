@@ -54,6 +54,7 @@ public class BeanUtil {
     Set set = beanMap.keySet();
 
     SimpleTypeConverter simpleTypeConverter = new SimpleTypeConverter();
+    simpleTypeConverter.registerCustomEditor(Date.class, new DateEditor());
 
     Set<? extends Entry<String, ?>> entries = map.entrySet();
 
