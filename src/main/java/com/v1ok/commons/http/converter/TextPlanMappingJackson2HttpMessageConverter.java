@@ -1,4 +1,4 @@
-package com.v1ok.commons.converter.json;
+package com.v1ok.commons.http.converter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.LinkedList;
@@ -12,8 +12,6 @@ public class TextPlanMappingJackson2HttpMessageConverter extends
     super(objectMapper);
     LinkedList<MediaType> supportedMediaTypes = new LinkedList<>();
     supportedMediaTypes.add(MediaType.TEXT_PLAIN);
-    supportedMediaTypes.add(new MediaType("application", "*+json"));
-
     this.setSupportedMediaTypes(supportedMediaTypes);
   }
 
