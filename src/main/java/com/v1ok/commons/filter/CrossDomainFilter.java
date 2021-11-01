@@ -23,8 +23,6 @@ public class CrossDomainFilter implements Filter {
   public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
       throws IOException, ServletException {
 
-    chain.doFilter(request, response);
-
     log.info("添加跨域请求消息头");
 
     HttpServletResponse httpResponse = (HttpServletResponse) response;
@@ -43,6 +41,8 @@ public class CrossDomainFilter implements Filter {
       });
     }
 
+
+    chain.doFilter(request, response);
   }
 
   @Override
